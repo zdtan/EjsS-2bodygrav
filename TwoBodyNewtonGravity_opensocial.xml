@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+<ModulePrefs
+title="TwoBodyNewtonGravity"
+author="Zhiming Darren TAN"
+description="Work started during the November 2016 workshop in Singapore organised by Wee Loo Kang and Leong Tze Kwang. Deep thanks to Francisco Esquembre, Wolfgang Christian and Felix J Garcia Clemente for help with various technical aspects, and also to the workshop participants for feedback and suggestions."
+screenshot="./screenshot.png"
+thumbnail="./screenshot.png">
+<Require feature="opensocial-0.9"/>
+<Require feature="dynamic-height"/>
+</ModulePrefs>
+<Content type="html" href="TwoBodyNewtonGravity_Simulation.xhtml"/>
+</Module>

@@ -1,0 +1,21 @@
+generated-with: Easy Java/Javascript Simulations, version 5.2, build 171013. Visit http://www.um.es/fem/Ejs
+title: Two-body Newtonian Gravitation
+logo-image: screenshot.png
+author: Zhiming Darren TAN
+copyright: Open Source Physics
+preferred-width: 800
+preferred-height: 600
+author-image: ScienceSamuraiDarrenTanSquareSmall.png
+source: TwoBodyNewtonGravity.ejss
+main-script: 
+main-simulation: TwoBodyNewtonGravity_Simulation.xhtml
+available-languages: 
+html-description: TwoBodyNewtonGravity_Intro_1.html
+html-contents: TwoBodyNewtonGravity_Contents.xhtml
+html-main: TwoBodyNewtonGravity.xhtml
+page-title: Introduction
+page-index: TwoBodyNewtonGravity_Intro_1.html
+page-title: Two-body Newtonian Gravitation
+page-index: TwoBodyNewtonGravity_Simulation.xhtml
+resource: screenshot.png
+resource: ScienceSamuraiDarrenTanSquareSmall.png
