@@ -338,8 +338,8 @@ var _stringProperties = {};
 
   _model.addToReset(function() {
     G = 1; // EjsS Model.Variables.Constants.G
-    scalev = 0.1; // EjsS Model.Variables.Constants.scalev
-    scalem = 0.1; // EjsS Model.Variables.Constants.scalem
+    scalev = 0.2; // EjsS Model.Variables.Constants.scalev
+    scalem = 0.2; // EjsS Model.Variables.Constants.scalem
   });
 
   _model.addToReset(function() {
@@ -474,19 +474,21 @@ var _stringProperties = {};
       // radius of 10 is where the x-axis normally is displayed until  // > Initialization.Init Page:54
       boolRad = true;  // > Initialization.Init Page:55
     }  // > Initialization.Init Page:56
-    // manage axis drawing for plots  // > Initialization.Init Page:57
-    //_view.plottingPanel.getAxisX().setPosition([0,0.5]);  // > Initialization.Init Page:58
-    //_view.plottingPanel.getAxisY().setPosition([0,0]);  // > Initialization.Init Page:59
-    //_view.plottingPanel2.getAxisX().setPosition([0,0.5]);  // > Initialization.Init Page:60
-    //_view.plottingPanel2.getAxisY().setPosition([0,0]);  // > Initialization.Init Page:61
-    //======= older code ======  // > Initialization.Init Page:62
-    // effective radial potential (exact!)  // > Initialization.Init Page:63
-    //radialPot = U(m,M,r(x,x0,y,y0))/(1+m/M) + 0.5*m*vtheta*vtheta*(1+m/M);  // > Initialization.Init Page:64
-    //radialPot = -G*M*m/r(x,x0,y,y0)/(1+m/M) + 0.5*m*vtheta*vtheta*(1+m/M);   // > Initialization.Init Page:65
-    // 0.5*m*vtheta*vtheta = L*L/(2*m*r*r) is the angular momentum term  // > Initialization.Init Page:66
-    // add the radial velocity terms 0.5*m*vr*vr*(1+m/M) to get the total energy  // > Initialization.Init Page:67
-    // calculate initial angular momentum for smaller object  // > Initialization.Init Page:68
-    //L = m*vy*(x-x0); // just use initial vy, assume y == 0, y0 == 0  // > Initialization.Init Page:69
+    // resize actualPotShape  // > Initialization.Init Page:57
+    _view.actualPotShape.setSize([0.2,0.2]);  // > Initialization.Init Page:58
+    // manage axis drawing for plots  // > Initialization.Init Page:59
+    //_view.plottingPanel.getAxisX().setPosition([0,0.5]);  // > Initialization.Init Page:60
+    //_view.plottingPanel.getAxisY().setPosition([0,0]);  // > Initialization.Init Page:61
+    //_view.plottingPanel2.getAxisX().setPosition([0,0.5]);  // > Initialization.Init Page:62
+    //_view.plottingPanel2.getAxisY().setPosition([0,0]);  // > Initialization.Init Page:63
+    //======= older code ======  // > Initialization.Init Page:64
+    // effective radial potential (exact!)  // > Initialization.Init Page:65
+    //radialPot = U(m,M,r(x,x0,y,y0))/(1+m/M) + 0.5*m*vtheta*vtheta*(1+m/M);  // > Initialization.Init Page:66
+    //radialPot = -G*M*m/r(x,x0,y,y0)/(1+m/M) + 0.5*m*vtheta*vtheta*(1+m/M);   // > Initialization.Init Page:67
+    // 0.5*m*vtheta*vtheta = L*L/(2*m*r*r) is the angular momentum term  // > Initialization.Init Page:68
+    // add the radial velocity terms 0.5*m*vr*vr*(1+m/M) to get the total energy  // > Initialization.Init Page:69
+    // calculate initial angular momentum for smaller object  // > Initialization.Init Page:70
+    //L = m*vy*(x-x0); // just use initial vy, assume y == 0, y0 == 0  // > Initialization.Init Page:71
   });
 
   _model.addToInitialization(function() {
@@ -886,6 +888,7 @@ var _stringProperties = {};
         case -10 : break; // make Lint happy
         default :
         case 0:
+          _view.drawingPanel.linkProperty("BLMessage",  function() { return "time="+_view._format(t,"0.000"); } ); // Elliptical linking property 'BLMessage' for element 'drawingPanel'
           _view.shapem.linkProperty("SizeX",  function() { return Math.pow(m,1/3)*scalem; } ); // Elliptical linking property 'SizeX' for element 'shapem'
           _view.shapem.linkProperty("X",  function() { return x; }, function(_v) { x = _v; } ); // Elliptical linking property 'X' for element 'shapem'
           _view.shapem.linkProperty("Y",  function() { return y; }, function(_v) { y = _v; } ); // Elliptical linking property 'Y' for element 'shapem'
@@ -894,6 +897,9 @@ var _stringProperties = {};
           _view.arrowm.linkProperty("X",  function() { return x; }, function(_v) { x = _v; } ); // Elliptical linking property 'X' for element 'arrowm'
           _view.arrowm.linkProperty("Y",  function() { return y; }, function(_v) { y = _v; } ); // Elliptical linking property 'Y' for element 'arrowm'
           _view.arrowm.linkProperty("SizeY",  function() { return vy*scalev; } ); // Elliptical linking property 'SizeY' for element 'arrowm'
+          _view.text.linkProperty("X",  function() { return x; }, function(_v) { x = _v; } ); // Elliptical linking property 'X' for element 'text'
+          _view.text.linkProperty("Y",  function() { return y; }, function(_v) { y = _v; } ); // Elliptical linking property 'Y' for element 'text'
+          _view.text.linkProperty("Visibility",  function() { return _isPaused; } ); // Elliptical linking property 'Visibility' for element 'text'
           _view.shapeM.linkProperty("SizeX",  function() { return Math.pow(M,1/3)*scalem; } ); // Elliptical linking property 'SizeX' for element 'shapeM'
           _view.shapeM.linkProperty("X",  function() { return X; }, function(_v) { X = _v; } ); // Elliptical linking property 'X' for element 'shapeM'
           _view.shapeM.linkProperty("Y",  function() { return Y; }, function(_v) { Y = _v; } ); // Elliptical linking property 'Y' for element 'shapeM'
@@ -910,11 +916,15 @@ var _stringProperties = {};
           _view.traceM.linkProperty("InputY",  function() { return Y; }, function(_v) { Y = _v; } ); // Elliptical linking property 'InputY' for element 'traceM'
           _view.trace0.linkProperty("InputX",  function() { return x0; }, function(_v) { x0 = _v; } ); // Elliptical linking property 'InputX' for element 'trace0'
           _view.trace0.linkProperty("InputY",  function() { return y0; }, function(_v) { y0 = _v; } ); // Elliptical linking property 'InputY' for element 'trace0'
+          _view.playPauseButton.setAction("OffClick", _pause); // Elliptical setting action 'OffClick' for element 'playPauseButton'
+          _view.playPauseButton.linkProperty("State",  function() { return _isPaused; } ); // Elliptical linking property 'State' for element 'playPauseButton'
+          _view.playPauseButton.setAction("OnClick", _play); // Elliptical setting action 'OnClick' for element 'playPauseButton'
+          _view.stepButton.setAction("OnClick", _step); // Elliptical setting action 'OnClick' for element 'stepButton'
+          _view.resetButton.setAction("OnClick", _reset); // Elliptical setting action 'OnClick' for element 'resetButton'
           _view.MSlider.setAction("OnRelease", _initialize); // Elliptical setting action 'OnRelease' for element 'MSlider'
           _view.MSlider.linkProperty("Value",  function() { return M; }, function(_v) { M = _v; } ); // Elliptical linking property 'Value' for element 'MSlider'
           _view.MSlider.setAction("OnChange", _initialize); // Elliptical setting action 'OnChange' for element 'MSlider'
           _view.MSlider.linkProperty("Disabled",  function() { return _isPlaying; } ); // Elliptical linking property 'Disabled' for element 'MSlider'
-          _view.MField.linkProperty("Value",  function() { return M; }, function(_v) { M = _v; } ); // Elliptical linking property 'Value' for element 'MField'
           _view.rdotField.linkProperty("Value",  function() { return vr; }, function(_v) { vr = _v; } ); // Elliptical linking property 'Value' for element 'rdotField'
           _view.rdotslider.setAction("OnRelease", _initialize); // Elliptical setting action 'OnRelease' for element 'rdotslider'
           _view.rdotslider.linkProperty("Minimum",  function() { return -4*vy; } ); // Elliptical linking property 'Minimum' for element 'rdotslider'
@@ -924,12 +934,6 @@ var _stringProperties = {};
           _view.rdotslider.linkProperty("Visibility",  function() { return _isPaused; } ); // Elliptical linking property 'Visibility' for element 'rdotslider'
           _view.rdotslider.linkProperty("Disabled",  function() { return _isPlaying; } ); // Elliptical linking property 'Disabled' for element 'rdotslider'
           _view.TECheckBox.linkProperty("Checked",  function() { return boolTE; }, function(_v) { boolTE = _v; } ); // Elliptical linking property 'Checked' for element 'TECheckBox'
-          _view.playPauseButton.setAction("OffClick", _pause); // Elliptical setting action 'OffClick' for element 'playPauseButton'
-          _view.playPauseButton.linkProperty("State",  function() { return _isPaused; } ); // Elliptical linking property 'State' for element 'playPauseButton'
-          _view.playPauseButton.setAction("OnClick", _play); // Elliptical setting action 'OnClick' for element 'playPauseButton'
-          _view.stepButton.setAction("OnClick", _step); // Elliptical setting action 'OnClick' for element 'stepButton'
-          _view.resetButton.setAction("OnClick", _reset); // Elliptical setting action 'OnClick' for element 'resetButton'
-          _view.timeField.linkProperty("Value",  function() { return t; }, function(_v) { t = _v; } ); // Elliptical linking property 'Value' for element 'timeField'
           _view.GPETrail.linkProperty("InputX",  function() { return t; }, function(_v) { t = _v; } ); // Elliptical linking property 'InputX' for element 'GPETrail'
           _view.GPETrail.linkProperty("InputY",  function() { return GPE; }, function(_v) { GPE = _v; } ); // Elliptical linking property 'InputY' for element 'GPETrail'
           _view.KEsmallTrail.linkProperty("InputX",  function() { return t; }, function(_v) { t = _v; } ); // Elliptical linking property 'InputX' for element 'KEsmallTrail'
@@ -947,6 +951,7 @@ var _stringProperties = {};
           _view.actualPotShape.linkProperty("Y",  function() { return radialPot; }, function(_v) { radialPot = _v; } ); // Elliptical linking property 'Y' for element 'actualPotShape'
           _view.actualPotTrail.linkProperty("InputX",  function() { return r(x,x0,y,y0); } ); // Elliptical linking property 'InputX' for element 'actualPotTrail'
           _view.actualPotTrail.linkProperty("InputY",  function() { return radialPot; }, function(_v) { radialPot = _v; } ); // Elliptical linking property 'InputY' for element 'actualPotTrail'
+          _view.totalETrail2.linkProperty("Visibility",  function() { return boolTE; }, function(_v) { boolTE = _v; } ); // Elliptical linking property 'Visibility' for element 'totalETrail2'
           break;
       } // end of switch
     }; // end of new reset
@@ -998,18 +1003,21 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
       ;
 
     _view._9(EJSS_INTERFACE.panel,"topPanel", _view.displayPanel) // EJsS HtmlView.Elliptical: declaration of element 'topPanel'
+      .setProperty("Height",400) // EJsS HtmlView.Elliptical: setting property 'Height' for element 'topPanel'
+      .setProperty("Width","100%") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'topPanel'
       .setProperty("Display","block") // EJsS HtmlView.Elliptical: setting property 'Display' for element 'topPanel'
       ;
 
     _view._9(EJSS_DRAWING2D.drawingPanel,"drawingPanel", _view.topPanel) // EJsS HtmlView.Elliptical: declaration of element 'drawingPanel'
       .setProperty("Height",400) // EJsS HtmlView.Elliptical: setting property 'Height' for element 'drawingPanel'
-      .setProperty("Width",800) // EJsS HtmlView.Elliptical: setting property 'Width' for element 'drawingPanel'
-      .setProperty("MinimumX",-10) // EJsS HtmlView.Elliptical: setting property 'MinimumX' for element 'drawingPanel'
+      .setProperty("Width","100%") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'drawingPanel'
+      .setProperty("MinimumX",-12) // EJsS HtmlView.Elliptical: setting property 'MinimumX' for element 'drawingPanel'
       .setProperty("MinimumY",-5) // EJsS HtmlView.Elliptical: setting property 'MinimumY' for element 'drawingPanel'
       .setProperty("AutoScaleY",true) // EJsS HtmlView.Elliptical: setting property 'AutoScaleY' for element 'drawingPanel'
       .setProperty("AutoScaleX",true) // EJsS HtmlView.Elliptical: setting property 'AutoScaleX' for element 'drawingPanel'
+      .setProperty("SquareAspect",true) // EJsS HtmlView.Elliptical: setting property 'SquareAspect' for element 'drawingPanel'
       .setProperty("MaximumY",5) // EJsS HtmlView.Elliptical: setting property 'MaximumY' for element 'drawingPanel'
-      .setProperty("MaximumX",10) // EJsS HtmlView.Elliptical: setting property 'MaximumX' for element 'drawingPanel'
+      .setProperty("MaximumX",12) // EJsS HtmlView.Elliptical: setting property 'MaximumX' for element 'drawingPanel'
       ;
 
     _view._9(EJSS_DRAWING2D.shape,"shapem", _view.drawingPanel) // EJsS HtmlView.Elliptical: declaration of element 'shapem'
@@ -1018,6 +1026,11 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
 
     _view._9(EJSS_DRAWING2D.arrow,"arrowm", _view.drawingPanel) // EJsS HtmlView.Elliptical: declaration of element 'arrowm'
       .setProperty("LineColor","blue") // EJsS HtmlView.Elliptical: setting property 'LineColor' for element 'arrowm'
+      ;
+
+    _view._9(EJSS_DRAWING2D.text,"text", _view.drawingPanel) // EJsS HtmlView.Elliptical: declaration of element 'text'
+      .setProperty("RelativePosition","NORTH_WEST") // EJsS HtmlView.Elliptical: setting property 'RelativePosition' for element 'text'
+      .setProperty("Text","Use slider below to adjust velocity") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'text'
       ;
 
     _view._9(EJSS_DRAWING2D.shape,"shapeM", _view.drawingPanel) // EJsS HtmlView.Elliptical: declaration of element 'shapeM'
@@ -1053,44 +1066,13 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
       .setProperty("NoRepeat",true) // EJsS HtmlView.Elliptical: setting property 'NoRepeat' for element 'trace0'
       ;
 
-    _view._9(EJSS_INTERFACE.panel,"controlPanel2", _view.displayPanel) // EJsS HtmlView.Elliptical: declaration of element 'controlPanel2'
-      .setProperty("Display","inline-block") // EJsS HtmlView.Elliptical: setting property 'Display' for element 'controlPanel2'
+    _view._9(EJSS_INTERFACE.panel,"middlePanel", _view.displayPanel) // EJsS HtmlView.Elliptical: declaration of element 'middlePanel'
+      .setProperty("Height",40) // EJsS HtmlView.Elliptical: setting property 'Height' for element 'middlePanel'
+      .setProperty("Width","100%") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'middlePanel'
       ;
 
-    _view._9(EJSS_INTERFACE.slider,"MSlider", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'MSlider'
-      .setProperty("Minimum",5) // EJsS HtmlView.Elliptical: setting property 'Minimum' for element 'MSlider'
-      .setProperty("Maximum",500) // EJsS HtmlView.Elliptical: setting property 'Maximum' for element 'MSlider'
-      ;
-
-    _view._9(EJSS_INTERFACE.imageAndTextButton,"MLabel", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'MLabel'
-      .setProperty("Text","M/m:") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'MLabel'
-      ;
-
-    _view._9(EJSS_INTERFACE.numberField,"MField", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'MField'
-      .setProperty("Width","50px") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'MField'
-      .setProperty("Format","0") // EJsS HtmlView.Elliptical: setting property 'Format' for element 'MField'
-      .setProperty("Editable",false) // EJsS HtmlView.Elliptical: setting property 'Editable' for element 'MField'
-      ;
-
-    _view._9(EJSS_INTERFACE.imageAndTextButton,"rdotLabel", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotLabel'
-      .setProperty("Text","radial velocity:") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'rdotLabel'
-      ;
-
-    _view._9(EJSS_INTERFACE.numberField,"rdotField", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotField'
-      .setProperty("Width","50px") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'rdotField'
-      .setProperty("Format","0.00") // EJsS HtmlView.Elliptical: setting property 'Format' for element 'rdotField'
-      .setProperty("Editable",false) // EJsS HtmlView.Elliptical: setting property 'Editable' for element 'rdotField'
-      ;
-
-    _view._9(EJSS_INTERFACE.slider,"rdotslider", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotslider'
-      ;
-
-    _view._9(EJSS_INTERFACE.panel,"controlPanel", _view.displayPanel) // EJsS HtmlView.Elliptical: declaration of element 'controlPanel'
-      .setProperty("Display","block") // EJsS HtmlView.Elliptical: setting property 'Display' for element 'controlPanel'
-      ;
-
-    _view._9(EJSS_INTERFACE.checkBox,"TECheckBox", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'TECheckBox'
-      .setProperty("Text","show total energy") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'TECheckBox'
+    _view._9(EJSS_INTERFACE.panel,"controlPanel", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'controlPanel'
+      .setProperty("CSS",{ "float":"left"}) // EJsS HtmlView.Elliptical: setting property 'CSS' for element 'controlPanel'
       ;
 
     _view._9(EJSS_INTERFACE.twoStateButton,"playPauseButton", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'playPauseButton'
@@ -1109,22 +1091,47 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
       .setProperty("ImageUrl","/org/opensourcephysics/resources/controls/images/reset.gif") // EJsS HtmlView.Elliptical: setting property 'ImageUrl' for element 'resetButton'
       ;
 
-    _view._9(EJSS_INTERFACE.imageAndTextButton,"timeLabel", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'timeLabel'
-      .setProperty("Text","time:") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'timeLabel'
+    _view._9(EJSS_INTERFACE.imageAndTextButton,"MLabel", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'MLabel'
+      .setProperty("Text","M/m =") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'MLabel'
       ;
 
-    _view._9(EJSS_INTERFACE.numberField,"timeField", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'timeField'
-      .setProperty("Width","50px") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'timeField'
-      .setProperty("Format","0.00") // EJsS HtmlView.Elliptical: setting property 'Format' for element 'timeField'
-      .setProperty("Editable",false) // EJsS HtmlView.Elliptical: setting property 'Editable' for element 'timeField'
+    _view._9(EJSS_INTERFACE.slider,"MSlider", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'MSlider'
+      .setProperty("Minimum",5) // EJsS HtmlView.Elliptical: setting property 'Minimum' for element 'MSlider'
+      .setProperty("Maximum",500) // EJsS HtmlView.Elliptical: setting property 'Maximum' for element 'MSlider'
+      .setProperty("ShowText",true) // EJsS HtmlView.Elliptical: setting property 'ShowText' for element 'MSlider'
+      .setProperty("Format","0") // EJsS HtmlView.Elliptical: setting property 'Format' for element 'MSlider'
+      ;
+
+    _view._9(EJSS_INTERFACE.panel,"controlPanel2", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'controlPanel2'
+      .setProperty("CSS",{ "float":"right"}) // EJsS HtmlView.Elliptical: setting property 'CSS' for element 'controlPanel2'
+      ;
+
+    _view._9(EJSS_INTERFACE.imageAndTextButton,"rdotLabel", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotLabel'
+      .setProperty("Text","radial vel =") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'rdotLabel'
+      ;
+
+    _view._9(EJSS_INTERFACE.numberField,"rdotField", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotField'
+      .setProperty("Width","50px") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'rdotField'
+      .setProperty("Format","0.000") // EJsS HtmlView.Elliptical: setting property 'Format' for element 'rdotField'
+      .setProperty("Editable",false) // EJsS HtmlView.Elliptical: setting property 'Editable' for element 'rdotField'
+      ;
+
+    _view._9(EJSS_INTERFACE.slider,"rdotslider", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotslider'
+      ;
+
+    _view._9(EJSS_INTERFACE.checkBox,"TECheckBox", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'TECheckBox'
+      .setProperty("Text","show total energy") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'TECheckBox'
       ;
 
     _view._9(EJSS_INTERFACE.panel,"bottomPanel", _view.displayPanel) // EJsS HtmlView.Elliptical: declaration of element 'bottomPanel'
+      .setProperty("Height",300) // EJsS HtmlView.Elliptical: setting property 'Height' for element 'bottomPanel'
+      .setProperty("Width","100%") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'bottomPanel'
       ;
 
     _view._9(EJSS_DRAWING2D.plottingPanel,"plottingPanel", _view.bottomPanel) // EJsS HtmlView.Elliptical: declaration of element 'plottingPanel'
       .setProperty("Height",300) // EJsS HtmlView.Elliptical: setting property 'Height' for element 'plottingPanel'
-      .setProperty("Width",400) // EJsS HtmlView.Elliptical: setting property 'Width' for element 'plottingPanel'
+      .setProperty("Width","50%") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'plottingPanel'
+      .setProperty("CSS",{ "float":"left"}) // EJsS HtmlView.Elliptical: setting property 'CSS' for element 'plottingPanel'
       .setProperty("XFixedTick",0) // EJsS HtmlView.Elliptical: setting property 'XFixedTick' for element 'plottingPanel'
       .setProperty("Title","Dynamics") // EJsS HtmlView.Elliptical: setting property 'Title' for element 'plottingPanel'
       .setProperty("MaximumY",1) // EJsS HtmlView.Elliptical: setting property 'MaximumY' for element 'plottingPanel'
@@ -1136,7 +1143,6 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
       .setProperty("AutoScaleY",true) // EJsS HtmlView.Elliptical: setting property 'AutoScaleY' for element 'plottingPanel'
       .setProperty("TitleX","Time") // EJsS HtmlView.Elliptical: setting property 'TitleX' for element 'plottingPanel'
       .setProperty("AutoScaleX",true) // EJsS HtmlView.Elliptical: setting property 'AutoScaleX' for element 'plottingPanel'
-      .setProperty("MarginY",1) // EJsS HtmlView.Elliptical: setting property 'MarginY' for element 'plottingPanel'
       .setProperty("TitleFont","normal bold 12px ") // EJsS HtmlView.Elliptical: setting property 'TitleFont' for element 'plottingPanel'
       ;
 
@@ -1171,7 +1177,8 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
 
     _view._9(EJSS_DRAWING2D.plottingPanel,"plottingPanel2", _view.bottomPanel) // EJsS HtmlView.Elliptical: declaration of element 'plottingPanel2'
       .setProperty("Height",300) // EJsS HtmlView.Elliptical: setting property 'Height' for element 'plottingPanel2'
-      .setProperty("Width",400) // EJsS HtmlView.Elliptical: setting property 'Width' for element 'plottingPanel2'
+      .setProperty("Width","50%") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'plottingPanel2'
+      .setProperty("CSS",{ "float":"right"}) // EJsS HtmlView.Elliptical: setting property 'CSS' for element 'plottingPanel2'
       .setProperty("XFixedTick",0) // EJsS HtmlView.Elliptical: setting property 'XFixedTick' for element 'plottingPanel2'
       .setProperty("Title","Effective Radial Potential") // EJsS HtmlView.Elliptical: setting property 'Title' for element 'plottingPanel2'
       .setProperty("MaximumX",10) // EJsS HtmlView.Elliptical: setting property 'MaximumX' for element 'plottingPanel2'
@@ -1180,12 +1187,12 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
       .setProperty("TitleY","Energy") // EJsS HtmlView.Elliptical: setting property 'TitleY' for element 'plottingPanel2'
       .setProperty("AutoScaleY",false) // EJsS HtmlView.Elliptical: setting property 'AutoScaleY' for element 'plottingPanel2'
       .setProperty("TitleX","Radial distance") // EJsS HtmlView.Elliptical: setting property 'TitleX' for element 'plottingPanel2'
-      .setProperty("MarginY",1) // EJsS HtmlView.Elliptical: setting property 'MarginY' for element 'plottingPanel2'
       .setProperty("TitleFont","normal bold 12px ") // EJsS HtmlView.Elliptical: setting property 'TitleFont' for element 'plottingPanel2'
       ;
 
     _view._9(EJSS_DRAWING2D.shape,"actualPotShape", _view.plottingPanel2) // EJsS HtmlView.Elliptical: declaration of element 'actualPotShape'
-      .setProperty("SizeX",0.5) // EJsS HtmlView.Elliptical: setting property 'SizeX' for element 'actualPotShape'
+      .setProperty("ResizesGroup",true) // EJsS HtmlView.Elliptical: setting property 'ResizesGroup' for element 'actualPotShape'
+      .setProperty("ShapeType","WHEEL") // EJsS HtmlView.Elliptical: setting property 'ShapeType' for element 'actualPotShape'
       ;
 
     _view._9(EJSS_DRAWING2D.trail,"actualPotTrail", _view.plottingPanel2) // EJsS HtmlView.Elliptical: declaration of element 'actualPotTrail'
@@ -1202,7 +1209,6 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
 
     _view._9(EJSS_DRAWING2D.trail,"totalETrail2", _view.plottingPanel2) // EJsS HtmlView.Elliptical: declaration of element 'totalETrail2'
       .setProperty("Attributes",{ "stroke-dasharray":"8 8 8 8" }) // EJsS HtmlView.Elliptical: setting property 'Attributes' for element 'totalETrail2'
-      .setProperty("Visibility",true) // EJsS HtmlView.Elliptical: setting property 'Visibility' for element 'totalETrail2'
       .setProperty("NoRepeat",true) // EJsS HtmlView.Elliptical: setting property 'NoRepeat' for element 'totalETrail2'
       ;
 
