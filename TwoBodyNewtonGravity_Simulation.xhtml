@@ -888,7 +888,7 @@ var _stringProperties = {};
         case -10 : break; // make Lint happy
         default :
         case 0:
-          _view.drawingPanel.linkProperty("BLMessage",  function() { return "time="+_view._format(t,"0.000"); } ); // Elliptical linking property 'BLMessage' for element 'drawingPanel'
+          _view.drawingPanel.linkProperty("TLMessage",  function() { return "time="+_view._format(t,"0.000"); } ); // Elliptical linking property 'TLMessage' for element 'drawingPanel'
           _view.shapem.linkProperty("SizeX",  function() { return Math.pow(m,1/3)*scalem; } ); // Elliptical linking property 'SizeX' for element 'shapem'
           _view.shapem.linkProperty("X",  function() { return x; }, function(_v) { x = _v; } ); // Elliptical linking property 'X' for element 'shapem'
           _view.shapem.linkProperty("Y",  function() { return y; }, function(_v) { y = _v; } ); // Elliptical linking property 'Y' for element 'shapem'
@@ -1067,59 +1067,62 @@ function TwoBodyNewtonGravity_View_0 (_topFrame) {
       ;
 
     _view._9(EJSS_INTERFACE.panel,"middlePanel", _view.displayPanel) // EJsS HtmlView.Elliptical: declaration of element 'middlePanel'
-      .setProperty("Height",40) // EJsS HtmlView.Elliptical: setting property 'Height' for element 'middlePanel'
       .setProperty("Width","100%") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'middlePanel'
       ;
 
-    _view._9(EJSS_INTERFACE.panel,"controlPanel", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'controlPanel'
-      .setProperty("CSS",{ "float":"left"}) // EJsS HtmlView.Elliptical: setting property 'CSS' for element 'controlPanel'
-      ;
-
-    _view._9(EJSS_INTERFACE.twoStateButton,"playPauseButton", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'playPauseButton'
+    _view._9(EJSS_INTERFACE.twoStateButton,"playPauseButton", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'playPauseButton'
       .setProperty("Tooltip","Play/Pause") // EJsS HtmlView.Elliptical: setting property 'Tooltip' for element 'playPauseButton'
       .setProperty("ImageOnUrl","/org/opensourcephysics/resources/controls/images/play.gif") // EJsS HtmlView.Elliptical: setting property 'ImageOnUrl' for element 'playPauseButton'
       .setProperty("ImageOffUrl","/org/opensourcephysics/resources/controls/images/pause.gif") // EJsS HtmlView.Elliptical: setting property 'ImageOffUrl' for element 'playPauseButton'
       ;
 
-    _view._9(EJSS_INTERFACE.button,"stepButton", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'stepButton'
+    _view._9(EJSS_INTERFACE.button,"stepButton", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'stepButton'
       .setProperty("Tooltip","Step forward") // EJsS HtmlView.Elliptical: setting property 'Tooltip' for element 'stepButton'
       .setProperty("ImageUrl","/org/opensourcephysics/resources/controls/images/stepforward.gif") // EJsS HtmlView.Elliptical: setting property 'ImageUrl' for element 'stepButton'
       ;
 
-    _view._9(EJSS_INTERFACE.button,"resetButton", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'resetButton'
+    _view._9(EJSS_INTERFACE.button,"resetButton", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'resetButton'
       .setProperty("Tooltip","Reset simulation") // EJsS HtmlView.Elliptical: setting property 'Tooltip' for element 'resetButton'
       .setProperty("ImageUrl","/org/opensourcephysics/resources/controls/images/reset.gif") // EJsS HtmlView.Elliptical: setting property 'ImageUrl' for element 'resetButton'
       ;
 
-    _view._9(EJSS_INTERFACE.imageAndTextButton,"MLabel", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'MLabel'
+    _view._9(EJSS_INTERFACE.panel,"panelMass", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'panelMass'
+      .setProperty("BorderColor","Red") // EJsS HtmlView.Elliptical: setting property 'BorderColor' for element 'panelMass'
+      .setProperty("BorderWidth",1) // EJsS HtmlView.Elliptical: setting property 'BorderWidth' for element 'panelMass'
+      .setProperty("Display","inline-block") // EJsS HtmlView.Elliptical: setting property 'Display' for element 'panelMass'
+      ;
+
+    _view._9(EJSS_INTERFACE.imageAndTextButton,"MLabel", _view.panelMass) // EJsS HtmlView.Elliptical: declaration of element 'MLabel'
       .setProperty("Text","M/m =") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'MLabel'
       ;
 
-    _view._9(EJSS_INTERFACE.slider,"MSlider", _view.controlPanel) // EJsS HtmlView.Elliptical: declaration of element 'MSlider'
+    _view._9(EJSS_INTERFACE.slider,"MSlider", _view.panelMass) // EJsS HtmlView.Elliptical: declaration of element 'MSlider'
       .setProperty("Minimum",5) // EJsS HtmlView.Elliptical: setting property 'Minimum' for element 'MSlider'
       .setProperty("Maximum",500) // EJsS HtmlView.Elliptical: setting property 'Maximum' for element 'MSlider'
       .setProperty("ShowText",true) // EJsS HtmlView.Elliptical: setting property 'ShowText' for element 'MSlider'
       .setProperty("Format","0") // EJsS HtmlView.Elliptical: setting property 'Format' for element 'MSlider'
       ;
 
-    _view._9(EJSS_INTERFACE.panel,"controlPanel2", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'controlPanel2'
-      .setProperty("CSS",{ "float":"right"}) // EJsS HtmlView.Elliptical: setting property 'CSS' for element 'controlPanel2'
+    _view._9(EJSS_INTERFACE.panel,"panelVel", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'panelVel'
+      .setProperty("BorderColor","Blue") // EJsS HtmlView.Elliptical: setting property 'BorderColor' for element 'panelVel'
+      .setProperty("BorderWidth",1) // EJsS HtmlView.Elliptical: setting property 'BorderWidth' for element 'panelVel'
+      .setProperty("Display","inline-block") // EJsS HtmlView.Elliptical: setting property 'Display' for element 'panelVel'
       ;
 
-    _view._9(EJSS_INTERFACE.imageAndTextButton,"rdotLabel", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotLabel'
+    _view._9(EJSS_INTERFACE.imageAndTextButton,"rdotLabel", _view.panelVel) // EJsS HtmlView.Elliptical: declaration of element 'rdotLabel'
       .setProperty("Text","radial vel =") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'rdotLabel'
       ;
 
-    _view._9(EJSS_INTERFACE.numberField,"rdotField", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotField'
+    _view._9(EJSS_INTERFACE.numberField,"rdotField", _view.panelVel) // EJsS HtmlView.Elliptical: declaration of element 'rdotField'
       .setProperty("Width","50px") // EJsS HtmlView.Elliptical: setting property 'Width' for element 'rdotField'
       .setProperty("Format","0.000") // EJsS HtmlView.Elliptical: setting property 'Format' for element 'rdotField'
       .setProperty("Editable",false) // EJsS HtmlView.Elliptical: setting property 'Editable' for element 'rdotField'
       ;
 
-    _view._9(EJSS_INTERFACE.slider,"rdotslider", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'rdotslider'
+    _view._9(EJSS_INTERFACE.slider,"rdotslider", _view.panelVel) // EJsS HtmlView.Elliptical: declaration of element 'rdotslider'
       ;
 
-    _view._9(EJSS_INTERFACE.checkBox,"TECheckBox", _view.controlPanel2) // EJsS HtmlView.Elliptical: declaration of element 'TECheckBox'
+    _view._9(EJSS_INTERFACE.checkBox,"TECheckBox", _view.middlePanel) // EJsS HtmlView.Elliptical: declaration of element 'TECheckBox'
       .setProperty("Text","show total energy") // EJsS HtmlView.Elliptical: setting property 'Text' for element 'TECheckBox'
       ;
 
